@@ -16,25 +16,28 @@ Param
     [string]$path
 )
 filter timestamp {"$(Get-Date -Format "yyyy-MM-dd_HH.mm.ss"): $_"}
+########################################## 
+$localpath = 'C:\ProgramData\ORG' #Change ORG to your organization's name, or the whole thing to use a different log path
+##########################################
 $filepath = "$path\OSUpgradeTS.log"
 $script = $MyInvocation.MyCommand.Name
 "$script Started" | timestamp | Out-File $filepath -Append
 
 try {
     [datetime]$date = get-date -UFormat "%D %r"
-    If(!(Test-Path 'C:\ProgramData\Mercy')){
-        New-Item -ItemType Directory -Force -Path 'C:\ProgramData\Mercy'
+    If(!(Test-Path $localpath)){
+        New-Item -ItemType Directory -Force -Path $localpath
     }
-    If(!(Test-Path 'C:\ProgramData\Mercy\Logs')){
-        New-Item -ItemType Directory -Force -Path 'C:\ProgramData\Mercy\Logs'
+    If(!(Test-Path "$localpath\Logs")){
+        New-Item -ItemType Directory -Force -Path "$localpath\Logs"
     }
-    $regpath = 'HKLM:\SOFTWARE\CCMEXEC'
+    $regpath = 'HKLM:\SOFTWARE\CCM'
     $OSbuild = (Get-CimInstance -ClassName Win32_OperatingSystem -Namespace root/cimv2).BuildNumber
-    if((Test-Path -LiteralPath "HKLM:\SOFTWARE\CCMEXEC") -ne $true) {
+    if((Test-Path -LiteralPath "HKLM:\SOFTWARE\CCM") -ne $true) {
         $regmain = New-Item $regpath -force -ea SilentlyContinue
         $regmain.Name + " created" | timestamp | Out-File $filepath -Append
     }else {
-        "HKEY_LOCAL_MACHINE\SOFTWARE\CCMEXEC already exists" | timestamp | Out-File $filepath -Append
+        "HKEY_LOCAL_MACHINE\SOFTWARE\CCM already exists" | timestamp | Out-File $filepath -Append
     }
     New-ItemProperty -LiteralPath $regpath -Name 'UPGRADEAdvertisementID' -Value $AdID -PropertyType String -Force -ErrorAction SilentlyContinue
     New-ItemProperty -LiteralPath $regpath -Name 'UPGRADEMachineName' -Value $Name -PropertyType String -Force -ErrorAction SilentlyContinue

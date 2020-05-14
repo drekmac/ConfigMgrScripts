@@ -4,7 +4,9 @@
     #*****************************************************
     #  Create Log File
     #*****************************************************
-    $log = "C:\ProgramData\Mercy\Logs\Admin_Accounts.log"
+    ###################################################
+    $log = "C:\ProgramData\ORG\Logs\Admin_Accounts.log" #Change ORG to your organization's name, or the whole thing for a different log path
+    ###################################################
     If (Test-Path $log) {
         Remove-Item -Path $log -Force
     }

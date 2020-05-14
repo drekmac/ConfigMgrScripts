@@ -3,6 +3,7 @@ Param
     [Parameter(Mandatory = $true)]
     [string]$path
 )
+#Runs a baseline called "Cleanup Disk Space" and will do nothing if a baseline with that name doesn't exist
 filter timestamp {"$(Get-Date -Format "yyyy-MM-dd_HH.mm.ss"): $_"}
 $filepath = "$path\OSUpgradeTS.log"
 $script = $MyInvocation.MyCommand.Name

@@ -3,6 +3,7 @@ Param
     [Parameter(Mandatory = $true)]
     [string]$path
 )
+#This was for a one off thing, probably will never be needed again.
 filter timestamp {"$(Get-Date -Format "yyyy-MM-dd_HH.mm.ss"): $_"}
 $filepath = "$path\OSUpgradeTS.log"
 $script = $MyInvocation.MyCommand.Name
