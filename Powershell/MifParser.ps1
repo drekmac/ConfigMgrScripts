@@ -1,4 +1,11 @@
-$path = "\\Wdc-vsdsps1p01\sms_ps1\inboxes\auth\dataldr.box\BADMIFS\DeltaMismatch"
+param(
+    [Parameter(Mandatory = $true,
+    HelpMessage = "Path to folder containing mif files")]
+    $path
+)
+if(!(Test-Path $path)){
+    Throw "$($path) can't be accessed. Check spelling or permissions."
+}
 $list = (Get-ChildItem $path).Name
 $date = Get-Date -Format 'yyyy-MM-dd_HH-mm'
 foreach($file in $list){
