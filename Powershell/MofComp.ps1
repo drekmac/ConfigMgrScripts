@@ -1,0 +1,1 @@
+mofcomp "C:\Program Files\Microsoft Policy Platform\ExtendedStatus.mof"

@@ -1,0 +1,2 @@
+Get-process firefox -ErrorAction Ignore | Stop-Process
+msiexec.exe /x '{FF8A0808-00FE-4FB2-8060-E3DF1BBD30A4}' /q;msiexec.exe /i 'Firefox Setup 68.10.0esr.msi' /L*V 'C:\ProgramData\SIU\Logs\Mozilla Firefox 68.10.0esr x64 en-US.log'
