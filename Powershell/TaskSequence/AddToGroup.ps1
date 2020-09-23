@@ -8,7 +8,7 @@ Param
     [string]$path
 )
 filter timestamp {"$(Get-Date -Format "yyyy-MM-dd_HH.mm.ss"): $_"}
-$filepath = "$path\OSUpgradeTS.log"
+$filepath = "$path\AddToGroup.log"
 $script = $MyInvocation.MyCommand.Name
 "$script Started" | timestamp | Out-File $filepath -Append
 
