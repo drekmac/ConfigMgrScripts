@@ -1,4 +1,6 @@
-#logging
+# Installs SIU Backgrounds for Teams Video Chat
+# Copies all JPG and PNG files in the current directory to the teams background directory
+
 If(!(Test-Path "C:\ProgramData\SIU\Logs")){
     If(!(Test-Path "C:\ProgramData\SIU")){
         New-Item -Path "C:\ProgramData" -Name "SIU" -ItemType "directory"
